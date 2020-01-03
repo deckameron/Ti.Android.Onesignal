@@ -2,6 +2,8 @@
 
 This module gives you the possibility to integrate OneSignal 3.12.4 into you're Appcelerator Android app. It's even possible to target people by registering tags, send InApp Messages, register a external user id, prompt the user for location permission and a bit more.
 
+<p align="center"><img src="https://app.onesignal.com/images/android_notification_image.gif" width="400" alt="Android Notification"></p>
+
 ## Generate Credentials
 
 Before setting up the Titanium SDK, you must generate the appropriate credentials for the platform(s) you are releasing on:
