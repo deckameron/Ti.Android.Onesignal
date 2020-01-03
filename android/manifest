@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.8.1
+apiversion: 4
+architectures: arm64-v8a armeabi-v7a x86
+description: onesignal_android
+author: Douglas Alves
+license: Specify your license
+copyright: Copyright (c) 2019 by Your Company
+
+# these should not be edited
+name: onesignal_android
+moduleid: ti.android.onesignal
+guid: deacf473-a56f-40c4-a480-1086c093f676
+platform: android
+minsdk: 8.0.0.GA

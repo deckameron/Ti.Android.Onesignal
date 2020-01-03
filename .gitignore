@@ -1,0 +1,13 @@
+.apt_generated
+.clang-format
+.classpath
+.project
+bin
+android/build/
+build.properties
+build.xml
+build/
+build.log
+tmp
+._*
+.DS_Store
