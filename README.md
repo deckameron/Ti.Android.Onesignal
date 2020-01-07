@@ -36,7 +36,7 @@ Before setting up the Titanium SDK, you must generate the appropriate credential
 
 ### Usage
 
-#### Push Notification
+### Push Notification
 1. Register device for Push Notifications
 
    ```js
@@ -162,7 +162,7 @@ You can call this method with false to opt users out of receiving all notificati
 	});
 	```
 
-#### InApp Messages
+### InApp Messages
 1. Sending InApp Messages:
 In-App Messages are highly customizable pop-up modals that any mobile app user (subscribed or unsubscribed) can receive when they are inside your app. The link below will teach you how to use it.
 
@@ -232,7 +232,7 @@ By default OneSignal plays the system's default notification sound when the devi
 	```js
 	OneSignal.enableSound(true);
 	```
-#### Email
+### Email
 1. Setting the user email:
 `setEmail` allows you to set the user's email address with the OneSignal SDK.
 	```js
