@@ -13,6 +13,7 @@ import com.onesignal.OSEmailSubscriptionObserver;
 import com.onesignal.OSEmailSubscriptionStateChanges;
 import com.onesignal.OSInAppMessageAction;
 import com.onesignal.OSNotification;
+import com.onesignal.OSNotificationAction;
 import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OSSubscriptionStateChanges;
 
@@ -78,6 +79,11 @@ public class OnesignalAndroidModule extends KrollModule {
 			try {
 				if (openNotification.notification.payload != null) {
 					JSONObject payload = openNotification.notification.payload.toJSONObject();
+					
+					if(openNotification.action.type == OSNotificationAction.ActionType.ActionTaken) {
+						payload.put("button_id", openNotification.action.actionID);
+					}
+					
 					payload.put("foreground", openNotification.notification.isAppInFocus);
 					proxy.fireEvent("notificationOpened", payload);
 				}
@@ -190,18 +196,38 @@ public class OnesignalAndroidModule extends KrollModule {
 		// This fires when a notification is opened by tapping on it.
 		@Override
 		public void notificationOpened(OSNotificationOpenResult result) {
+			
+			OSNotificationAction.ActionType actionType = result.action.type;
+			
 			Log.d(LCAT, "ti.android.onesignal Notification opened handler");
 			if (TiApplication.getAppCurrentActivity() != null && getModuleInstance() != null) {
 				try {
 					if (result.notification.payload != null) {
+						
 						JSONObject payload = result.notification.payload.toJSONObject();
 						payload.put("foreground", result.notification.isAppInFocus);
-
-						if (getModuleInstance().hasListeners("notificationOpened")) {
-							getModuleInstance().fireEvent("notificationOpened", payload);
+						
+						if (actionType == OSNotificationAction.ActionType.ActionTaken) {
+							
+							Log.i(LCAT, "Button pressed with id: " + result.action.actionID);
+							
+							payload.put("button_id", result.action.actionID);
+							
+							if (getModuleInstance().hasListeners("notificationButtonClicked")) {
+								getModuleInstance().fireEvent("notificationButtonClicked", payload);
+							} else {
+								// save the notification for later processing
+								openNotification = result;
+							}
+							
 						} else {
-							// save the notification for later processing
-							openNotification = result;
+							
+							if (getModuleInstance().hasListeners("notificationOpened")) {
+								getModuleInstance().fireEvent("notificationOpened", payload);
+							} else {
+								// save the notification for later processing
+								openNotification = result;
+							}
 						}
 					}
 				} catch (Throwable t) {

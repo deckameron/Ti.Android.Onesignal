@@ -75,7 +75,7 @@ Disable or enable location collection (defaults to enabled if your app has locat
             return
         }
 
-        Ti.API.info(Ti.Platform.osname === "iphone"? e.results : JSON.parse(e.results));
+        Ti.API.info(JSON.parse(e.results));
     });
     ```
 8. SetExternalUserId:
@@ -152,7 +152,15 @@ You can call this method with false to opt users out of receiving all notificati
 		Titanium.API.info(' OneSignal ***** subscriptionChanged!' + JSON.stringify(evt));
 		//var canNotify = evt.to.subscribed;
 	});
-	   ```
+	```
+15. Button Clicked listener:
+	If you add buttons to your notification, you listen to their click events.
+	```js
+	onesignal.addEventListener('notificationButtonClicked', function(evt) {
+		Titanium.API.info(' OneSignal ***** Button Clicked!');
+		Titanium.API.info(evt.button_id);
+	});
+	```
 
 #### InApp Messages
 1. Sending InApp Messages:
