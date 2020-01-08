@@ -269,6 +269,8 @@ Cheers!
 ## Possible build errors
 1. Duplicate `firebase-iid-interop` regarding Firebase Core and Firebase Cloud Messaging:
 	- Just delete the `firebase-iid-interop-16.0.1.aar` from Firebase Cloud Messaging lib folder.
+2. if you import the `<module platform="android">ti.playservices</module>` or any module that imports it, you will see this message on the console `[WARN] OneSignal: Both GCM & FCM Libraries detected! Please remove the deprecated GCM library.`
+	- Don't worry. There nothing to do here, just move on. :)
 
 ## Build yourself
 
