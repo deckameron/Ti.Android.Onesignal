@@ -11,9 +11,11 @@
             xmlns:tools="http://schemas.android.com/tools"
             package="com.onesignal">
 
+			<!-- Removed to use the Firebase Cloud Message instead of GCM
             <permission android:name="${tiapp.properties['id']}.permission.C2D_MESSAGE"
                         android:protectionLevel="signature" />
             <uses-permission android:name="${tiapp.properties['id']}.permission.C2D_MESSAGE" />
+            -->
 
             <!-- OneSignal SDK has runtime checks Android version. -->
             <!--<uses-sdk tools:overrideLibrary="android.support.customtabs"/>-->
@@ -83,10 +85,6 @@
 
                 <receiver android:name="com.onesignal.NotificationOpenedReceiver" />
 
-                <service android:name="com.onesignal.GcmIntentService" />
-                <service android:name="com.onesignal.GcmIntentJobService"
-                         android:permission="android.permission.BIND_JOB_SERVICE" />
-
                 <service android:name="com.onesignal.RestoreJobService"
                          android:permission="android.permission.BIND_JOB_SERVICE" />
 
@@ -113,6 +111,11 @@
                         <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
                     </intent-filter>
                 </receiver>
+                <!-- Removed to use the Firebase Cloud Message instead of GCM
+                <service android:name="com.onesignal.GcmIntentService" />
+                <service android:name="com.onesignal.GcmIntentJobService"
+                         android:permission="android.permission.BIND_JOB_SERVICE" />
+                
                 <receiver android:name="com.onesignal.GcmBroadcastReceiver"
                           android:permission="com.google.android.c2dm.permission.SEND" >
                     <intent-filter android:priority="999">
@@ -120,14 +123,13 @@
                         <category android:name="${tiapp.properties['id']}" />
                     </intent-filter>
                 </receiver>
+                -->
             </application>
-
-            <!-- NOTE: See release version for tags with placeholders -->
-
         </manifest>
     </android>
     <mobileweb></mobileweb>
     <modules>
-      <module platform="android">ti.playservices</module>
+      <module platform="android">firebase.core</module>
+      <module platform="android">firebase.cloudmessaging</module>
     </modules>
 </ti:module>
