@@ -11,8 +11,12 @@ Before setting up the Titanium SDK, you must generate the appropriate credential
 ## Requirements
 
 - [x] Titanium SDK 8.0.0+
+
+Version [1.8.3](https://github.com/deckameron/Ti.Android.Onesignal/blob/master/dist/ti.android.onesignal-android-1.8.3.zip?raw=true) uses FCM and needs:
 - [x] [Firebase Core Module]([https://github.com/hansemannn/titanium-firebase-core](https://github.com/hansemannn/titanium-firebase-core))
 - [x] [Firebase Cloud Messaging Module]([https://github.com/hansemannn/titanium-firebase-cloud-messaging](https://github.com/hansemannn/titanium-firebase-cloud-messaging))
+
+If you don't want FCM, but GCM, use [1.8.2](https://github.com/deckameron/Ti.Android.Onesignal/blob/master/dist/ti.android.onesignal-android-1.8.2.zip?raw=true) instead.
 
 ## Follow Guide
 
