@@ -266,6 +266,10 @@ Tracks changes to email subscriptions (ie. the user sets their email or logs out
 	```
 Cheers!
 
+## Possible build errors
+1. Duplicate `firebase-iid-interop` regarding Firebase Core and Firebase Cloud Messaging:
+	- Just delete the `firebase-iid-interop-16.0.1.aar` from Firebase Cloud Messaging lib folder.
+
 ## Build yourself
 
 1. `brew install yarn --without-node` to install yarn without relying on a specific Node version
