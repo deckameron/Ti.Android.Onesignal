@@ -1,14 +1,18 @@
 # Titanium Android OneSignal
 
-This module gives you the possibility to integrate OneSignal 3.12.4 into you're Appcelerator Android app. It's even possible to target people by registering tags, send InApp Messages, register a external user id, prompt the user for location permission and a bit more.
-
-<p align="center"><img src="https://app.onesignal.com/images/android_notification_image.gif" width="400" alt="Android Notification"></p>
+This module gives you the possibility to integrate OneSignal into you're Appcelerator Android app. It's even possible to target people by registering tags, send InApp Messages, register a external user id, prompt the user for location permission and a bit more.
 
 ## Generate Credentials
 
 Before setting up the Titanium SDK, you must generate the appropriate credentials for the platform(s) you are releasing on:
 
 - ANDROID - [Generate a Google Server API Key](https://documentation.onesignal.com/docs/generate-a-google-server-api-key)
+
+## Requirements
+
+- [x] Titanium SDK 8.0.0+
+- [x] [Firebase Core Module]([https://github.com/hansemannn/titanium-firebase-core](https://github.com/hansemannn/titanium-firebase-core))
+- [x] [Firebase Cloud Messaging Module]([https://github.com/hansemannn/titanium-firebase-cloud-messaging](https://github.com/hansemannn/titanium-firebase-cloud-messaging))
 
 ## Follow Guide
 
@@ -18,25 +22,20 @@ Before setting up the Titanium SDK, you must generate the appropriate credential
 
     ```xml
     <modules>
+      <module platform="iphone">ti.android.onesignal</module>
       <module platform="android">ti.android.onesignal</module>
     </modules>
     ```
 1. Configure your app into the App Settings panel for the right Platform (Android and/or iOS).
-1. To use OneSignal on iOS devices, register the OneSignal-appId into  `tiapp.xml`:
-
-    ```xml
-    <property name="OneSignal_AppID" type="string">[App-id]</property>
-    ```
 1. To use OneSignal on Android devices, register some meta-data as well:
 
     ```xml
-    <meta-data android:name="onesignal_app_id"
-                   android:value="[App-id]" />
+    <meta-data android:name="onesignal_app_id" android:value="[App-id]" />
     ```
 
 ### Usage
 
-### Push Notification
+#### Push Notification
 1. Register device for Push Notifications
 
    ```js
@@ -56,17 +55,17 @@ Disable or enable location collection (defaults to enabled if your app has locat
 	onesignal.setLocationShared(false);
    ```
    
-5. To add the possibility to target people for notifications, send a tag:
+4. To add the possibility to target people for notifications, send a tag:
 
    ```js
 	onesignal.sendTag({ key: 'foo', value: 'bar' });
    ```
-6. Delete tag:
+5. Delete tag:
 
    ```js
    onesignal.deleteTag({ key: 'foo' });
    ```
-7. Get tags:
+6. Get tags:
 
     ```js
    onesignal.getTags(function(e) {
@@ -75,26 +74,26 @@ Disable or enable location collection (defaults to enabled if your app has locat
             return
         }
 
-        Ti.API.info(JSON.parse(e.results));
+        Ti.API.info(Ti.Platform.osname === "iphone"? e.results : JSON.parse(e.results));
     });
     ```
-8. SetExternalUserId:
+7. SetExternalUserId:
 If your system assigns unique identifiers to users, it can be annoying to have to also remember their OneSignal user ID's as well. To make things easier, OneSignal now allows you to set an external_id for your users. Simply call this method, pass in your custom user ID (as a string), and from now on when you send a push notification, you can use include_external_user_ids instead of include_player_ids.
 	```js
    onesignal.setExternalUserId("user_153321568");
    ```
-9. RemoveExternalUserId:
+8. RemoveExternalUserId:
 If your user logs out of your app and you would like to disassociate their custom user ID from your system with their OneSignal user ID, you will want to call this method.
 	```js
    onesignal.removeExternalUserId();
    ```
-10. SetSubscription:
+9. SetSubscription:
 You can call this method with false to opt users out of receiving all notifications through OneSignal. You can pass true later to opt users back into notifications.
 	```js
 	onesignal.setSubscription(true);
 	```
 
-11. IdsAvailable:
+10. IdsAvailable:
 
     ```js
     onesignal.idsAvailable(function(e) {
@@ -103,7 +102,7 @@ You can call this method with false to opt users out of receiving all notificati
     });
     ```
 
-12. Opened listener:
+11. Opened listener:
    The returned content is matching the available payload on OneSignal:
    - [Android](https://documentation.onesignal.com/docs/android-native-sdk#section--osnotificationpayload-)
 
@@ -131,17 +130,17 @@ You can call this method with false to opt users out of receiving all notificati
 	    });
 	    ```
 
-13. Received listener:
+12. Received listener:
     The returned content is matching the available payload on OneSignal:
    - [Android](https://documentation.onesignal.com/docs/android-native-sdk#section--osnotificationpayload-)
 
 	   ```js
 	   onesignal.addEventListener('notificationReceived', function(evt) {
-	       console.log(' ***** Received! ' + JSON.stringify(evt));
+	       Titanium.API.info(' ***** Received! ' + JSON.stringify(evt));
 	   });
 	   ```
-14. Subscription Changed listener:
-    The  `onOSSubscriptionChanged`  method will be fired on the passed-in object when a notification subscription property changes.
+13. Subscription Changed listener:
+    The  `subscriptionChanged`  method will be fired on the passed-in object when a notification subscription property changes.
 	This includes the following events:
 	-   Getting a Registration Id (push token) from Google
 	-   Getting a player / user id from OneSignal
@@ -153,7 +152,7 @@ You can call this method with false to opt users out of receiving all notificati
 		//var canNotify = evt.to.subscribed;
 	});
 	```
-15. Button Clicked listener:
+14. Button Clicked listener:
 	If you add buttons to your notification, you listen to their click events.
 	```js
 	onesignal.addEventListener('notificationButtonClicked', function(evt) {
@@ -161,8 +160,8 @@ You can call this method with false to opt users out of receiving all notificati
 		Titanium.API.info(evt.button_id);
 	});
 	```
-
-### InApp Messages
+	
+#### InApp Messages
 1. Sending InApp Messages:
 In-App Messages are highly customizable pop-up modals that any mobile app user (subscribed or unsubscribed) can receive when they are inside your app. The link below will teach you how to use it.
 
@@ -232,7 +231,7 @@ By default OneSignal plays the system's default notification sound when the devi
 	```js
 	OneSignal.enableSound(true);
 	```
-### Email
+#### Email
 1. Setting the user email:
 `setEmail` allows you to set the user's email address with the OneSignal SDK.
 	```js
@@ -274,25 +273,3 @@ Cheers!
 1. Step into the android directory
 1. Copy `build.properties.dist` to `build.properties` and edit to match your environment
 1. To build the module execute `rm -rf build && mkdir -p build/docs && ../node_modules/.bin/ti build -p android --build-only`
-
-#### Google Play Services
-
-Since Titanium 7.x this module relies on [https://github.com/appcelerator-modules/ti.playservices](ti.playservices)
-
-If you still need to support Titanium 6.x and you need to change the used Google Play Services version, execute the following actions:
-1. Install the Google Play Services on your system:
-
-   ```bash
-   sdkmanager "extras;google;m2repository"
-   ```
-1. Fetch the 4 needed *.aar files from the SDK path `extras/google/m2repository/com/google/android/gms`
-   - base
-   - basement
-   - gcm
-   - idd
-   - location
-
-   For the version you want use.
-1. Extract the *.aar file, and rename the `classes.jar` to `google-play-services-<part>.jar`.
-1. Update the used jars in the `lib` folder.
-1. Update the res folder with the one from the `google-play-services-basement.jar`
