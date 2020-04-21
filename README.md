@@ -26,7 +26,6 @@ If you don't want FCM, but GCM, use [1.8.2](https://github.com/deckameron/Ti.And
 
     ```xml
     <modules>
-      <module platform="iphone">ti.android.onesignal</module>
       <module platform="android">ti.android.onesignal</module>
     </modules>
     ```
