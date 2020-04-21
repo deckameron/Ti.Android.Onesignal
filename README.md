@@ -10,6 +10,9 @@ Before setting up the Titanium SDK, you must generate the appropriate credential
 
 ## Requirements
 
+- [x] Titanium SDK 9.0.0+
+Version [2.0.0](https://github.com/deckameron/Ti.Android.Onesignal/blob/master/dist/ti.android.onesignal-android-2.0.0.zip?raw=true)
+
 - [x] Titanium SDK 8.0.0+
 
 Version [1.8.3](https://github.com/deckameron/Ti.Android.Onesignal/blob/master/dist/ti.android.onesignal-android-1.8.3.zip?raw=true) uses FCM and needs:
