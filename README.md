@@ -12,7 +12,7 @@ Before setting up the Titanium SDK, you must generate the appropriate credential
 
 - [x] Titanium SDK 9.0.0+
 
-Version [2.0.0](https://github.com/deckameron/Ti.Android.Onesignal/blob/master/dist/ti.android.onesignal-android-2.0.0.zip?raw=true)
+Version [2.1.0](https://github.com/deckameron/Ti.Android.Onesignal/blob/master/dist/ti.android.onesignal-android-2.1.0.zip?raw=true)
 
 - [x] Titanium SDK 8.0.0+
 
