@@ -37,7 +37,8 @@ If you don't want FCM, but GCM, use [1.8.2](https://github.com/deckameron/Ti.And
 1. To use OneSignal on Android devices, register some meta-data as well:
 
     ```xml
-    <meta-data android:name="onesignal_app_id" android:value="[App-id]" />
+    <meta-data android:name="onesignal_app_id" android:value="[App-id]" tools:replace="android:value"/>
+    <meta-data android:name="onesignal_google_project_number" android:value="str:[Google-Project-Number]" tools:replace="android:value"/>
     ```
 
 ### Usage
